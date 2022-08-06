@@ -3,11 +3,8 @@ function findExceedence(data, dates, threshold) {
     let result = null;
     for (var i = 0; i < data.length; i++) {
         let value = data[i];
-        if (isNaN(value)) {
-            continue;
-        }
-
-        if (value > threshold) {
+        
+        if (!isNaN(value) && value > threshold) {
             if (!result) {
                 result = {
                     iStart: i,
