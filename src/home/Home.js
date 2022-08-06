@@ -49,7 +49,11 @@ class Home extends Component {
 
     render() {
         return (<div className={styles.content}>
-            <input type="file" onChange={(e) => this.showFile(e)} />
+            <div className="mb-3">
+                <label for="formFile" className="form-label">Select your Data file</label>
+                <input className="form-control" type="file" onChange={(e) => this.showFile(e)} />
+            </div>
+
             <br />
             {this.state.results ? this.state.results.map(d => <div><h1 className={styles.title}>{d.title}</h1><h6>{`Threshold value: ${d.threshold}`}</h6><JsonToTable json={d.json} /></div>) : null}
         </div>
