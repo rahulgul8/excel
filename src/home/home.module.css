@@ -1,10 +1,31 @@
 .content {
-    flex-direction: column;  /* make main axis vertical */
-    justify-content: center; /* center items vertically, in this case */
-    align-items: center;  
+    flex-direction: column;
+    /* make main axis vertical */
+    justify-content: center;
+    /* center items vertically, in this case */
+    align-items: center;
 }
 
-.title{
+.title {
     margin: 50px 0px;
 
+}
+
+.total {
+    margin: 20px 0px;
+}
+
+.print {
+    margin: 0;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+
+    .print {
+        display: block;
+        margin: 50px;
+    }
 }

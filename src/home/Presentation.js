@@ -1,7 +1,9 @@
 import moment from "moment";
-const format = "YYYY-MM-DD HH:mm";
+let format = "YYYY-MM-DD HH:mm";
 
-function formatExceedance(data) {
+function formatExceedance(data, dateFormat) {
+    debugger
+    format = dateFormat;
     return data.map((d, i) => formatRecord(d, i))
 }
 
@@ -34,8 +36,8 @@ function getValueRange(values) {
 }
 
 function getHours(start, end) {
-    start = moment(start, format);
-    end = moment(end, format);
+    start = getDate(start);
+    end = getDate(end);
 
     let hours = end.diff(start, 'hours');
     start.add(hours, 'hours');
@@ -59,11 +61,37 @@ function getDateRange(startDate, endDate) {
 }
 
 function getTimeString(date) {
-    return moment(date, format).format("HH.mm")
+    return getDate(date).format("HH.mm")
 }
 
 function getDateString(date) {
-    return moment(date, format).format("DD.MM.YYYY")
+    return getDate(date).format("DD.MM.YYYY")
+}
+
+function getDate(date) {
+    if (!isNaN(date)) {
+        return moment(excelNumberToDate(date))
+    }
+    return moment(date, format)
+}
+
+function excelNumberToDate(serial) {
+    var utc_days = Math.floor(serial - 25569);
+    var utc_value = utc_days * 86400;
+    var date_info = new Date(utc_value * 1000);
+
+    var fractional_day = serial - Math.floor(serial) + 0.0000001;
+
+    var total_seconds = Math.floor(86400 * fractional_day);
+
+    var seconds = total_seconds % 60;
+
+    total_seconds -= seconds;
+
+    var hours = Math.floor(total_seconds / (60 * 60));
+    var minutes = Math.floor(total_seconds / 60) % 60;
+
+    return new Date(date_info.getFullYear(), date_info.getMonth(), date_info.getDate(), hours, minutes, seconds);
 }
 
 export default { formatExceedance }
