@@ -108,7 +108,6 @@ class Home extends Component {
 
 
     getScreen(results) {
-        debugger
         return results ? results.map(d => <div>
             <h1 className={styles.title}>{d.title}</h1>
             <h6>{d.threshold && `Threshold value: ${d.threshold}`}</h6>

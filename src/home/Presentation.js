@@ -2,7 +2,6 @@ import moment from "moment";
 let format = "YYYY-MM-DD HH:mm";
 
 function formatExceedance(data, dateFormat) {
-    debugger
     format = dateFormat;
     return data.map((d, i) => formatRecord(d, i))
 }
