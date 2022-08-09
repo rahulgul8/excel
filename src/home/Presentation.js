@@ -14,18 +14,23 @@ function formatRecord(value, i) {
     let hours = getHours(startDate, endDate);
     let valueRange = getValueRange(values);
     return {
-        "SL. No.": i,
-        "Date": dateRange,
-        "Exceedance Observed (hrs)": timeRange,
-        "Total Exceedance in Hours": hours,
-        "Range in ppm": valueRange,
-        "No.of Occurance of Exceedance in 15mins average data": values.length
+        i,
+        dateRange,
+        timeRange,
+        hours,
+        valueRange,
+        count: values.length
     }
 }
 
 function getValueRange(values) {
     values = values.map(v => v.value).sort();
-    return `${values[0]} - ${values[values.length - 1]}`
+    let start = values[0]
+    let end = values[values.length - 1];
+    if (start == end) {
+        return start;
+    }
+    return `${start} - ${end}`
 }
 
 function getHours(start, end) {
