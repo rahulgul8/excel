@@ -4,7 +4,7 @@ function findExceedence(data, dates, threshold) {
     for (var i = 0; i < data.length; i++) {
         let value = data[i];
 
-        if ((!isNaN(value) || value <= 0) && value > threshold) {
+        if ((!isNaN(value) || value > 0) && value > threshold) {
             if (!result) {
                 result = {
                     iStart: i,

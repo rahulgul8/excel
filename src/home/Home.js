@@ -77,7 +77,7 @@ class Home extends Component {
 
     getStaticData(column, dates, threshold) {
         let exceed = util.findStatic(column, dates, threshold);
-        let values = present.formatExceedance(exceed, this.state.format).filter(d => !isNaN(d.valueRange) || d.valueRange > 0).filter(d => d.valueRange.toString().trim().length != 0);
+        let values = present.formatExceedance(exceed, this.state.format).filter(d => !isNaN(d.valueRange) && d.valueRange > 0).filter(d => d.valueRange.toString().trim().length != 0);
         let total = this.getTotal(values)
         values = values.map((d, i) => ({
             "SL. No.": i + 1,
